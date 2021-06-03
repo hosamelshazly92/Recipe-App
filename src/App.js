@@ -15,7 +15,6 @@ const App = () => {
       const response = await fetch(`https://api.edamam.com/search?q=${query}&app_id=${appId}&app_key=${appKey}`);
       const data = await response.json();
       setRecipes(data.hits);
-      // console.log(data.hits);
     }
 
     getRecipes();
@@ -32,22 +31,30 @@ const App = () => {
   }
 
   return (
-    <div className="container">
-      <form className="search-form" onSubmit={ handleSearch }>
-        <input className="search-bar" type="text" value={search} onChange={ updateSearch } />
-        <button className="search-button" type="submit">Search</button>
-      </form>
+    <div>
+      <div className="top p-4">
+        <div className="container">
+          <form className="form-inline" onSubmit={ handleSearch }>
+            <input className="form-control col-sm-10" type="text" placeholder="Search...." value={search} onChange={ updateSearch } />
+            <button className="btn btn-primary col-sm-2" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
 
-      <div className="recipes">
-        { recipes.map((itm, idx) => (
-          <Recipe
-            key={ idx }
-            title={ itm.recipe.label }
-            calories={ itm.recipe.calories }
-            img={ itm.recipe.image }
-            ingredients={ itm.recipe.ingredients }
-          />
-        )) }
+      <div className="bottom pt-4 mt-4">
+        <div className="container">
+          <div className="row">
+            { recipes.map((itm, idx) => (
+              <Recipe
+                key={ idx }
+                title={ itm.recipe.label }
+                calories={ itm.recipe.calories }
+                img={ itm.recipe.image }
+                ingredients={ itm.recipe.ingredients }
+              />
+            )) }
+          </div>
+        </div>
       </div>
     </div>
   )
