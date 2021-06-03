@@ -32,20 +32,23 @@ const App = () => {
   }
 
   return (
-    <div className="App">
+    <div className="container">
       <form className="search-form" onSubmit={ handleSearch }>
         <input className="search-bar" type="text" value={search} onChange={ updateSearch } />
         <button className="search-button" type="submit">Search</button>
       </form>
-      { recipes.map((itm, idx) => (
-        <Recipe
-          key={ idx }
-          title={ itm.recipe.label }
-          calories={ itm.recipe.calories }
-          img={ itm.recipe.image }
-          ingredients={ itm.recipe.ingredients }
-        />
-      )) }
+
+      <div className="recipes">
+        { recipes.map((itm, idx) => (
+          <Recipe
+            key={ idx }
+            title={ itm.recipe.label }
+            calories={ itm.recipe.calories }
+            img={ itm.recipe.image }
+            ingredients={ itm.recipe.ingredients }
+          />
+        )) }
+      </div>
     </div>
   )
 }
