@@ -1,25 +1,40 @@
-import logo from './logo.svg';
+import React, { useState, useEffect } from 'react';
+import Recipe from './Recipe';
 import './App.css';
 
-function App() {
+const App = () => {
+  const appId = "ee67b852";
+  const appKey = "6250b2ebd7cfe37e116e92645f480783";
+
+  const [recipes, setRecipes] = useState([]);
+
+  useEffect(() => {
+    const getRecipes = async () => {
+      const response = await fetch(`https://api.edamam.com/search?q=chicken&app_id=${appId}&app_key=${appKey}`);
+      const data = await response.json();
+      setRecipes(data.hits);
+      // console.log(data.hits);
+    }
+
+    getRecipes();
+  }, []);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <form className="search-form">
+        <input className="search-bar" type="text" />
+        <button className="search-button" type="submit">Search</button>
+      </form>
+      { recipes.map((itm, idx) => (
+        <Recipe 
+          title={ itm.recipe.label }
+          calories={ itm.recipe.calories }
+          img={ itm.recipe.image }
+          key={ idx }
+        />
+      )) }
     </div>
-  );
+  )
 }
 
 export default App;
