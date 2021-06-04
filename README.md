@@ -2,4 +2,4 @@
 Food recipe application using React
 
 ## Project Link
-[a link](https://recipe-app-orcin.vercel.app/)
+[Food Recipe Link](https://recipe-app-orcin.vercel.app/)
